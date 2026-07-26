@@ -10,8 +10,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   final GetMovies getMovies;
   final GetMovieTrailer getMovieTrailer;
 
-  /// Cached so the UI can fall back to the list after a trailer
-  /// state (success or error) has been consumed by the listener.
+
   List<Movie> _lastLoadedMovies = const [];
 
   MovieBloc({
@@ -46,7 +45,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       (failure) => emit(MovieTrailerError(failure.message)),
       (key) => emit(MovieTrailerReady(movieId: event.movieId, trailerKey: key)),
     );
-    // Return to the list view once the trailer hand-off has been emitted.
+  
     emit(MovieLoaded(_lastLoadedMovies));
   }
 }

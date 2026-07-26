@@ -32,8 +32,7 @@ class MovieError extends MovieState {
   List<Object?> get props => [message];
 }
 
-/// Emitted once a trailer key has been resolved for a selected movie so the
-/// UI layer can hand control back to the native host via the MethodChannel.
+
 class MovieTrailerReady extends MovieState {
   final int movieId;
   final String trailerKey;

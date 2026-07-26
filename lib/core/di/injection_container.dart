@@ -13,31 +13,30 @@ import '../network/network_info.dart';
 final GetIt sl = GetIt.instance;
 
 Future<void> initDependencies() async {
-  // Bloc
+
   sl.registerFactory(
     () => MovieBloc(getMovies: sl(), getMovieTrailer: sl()),
   );
 
-  // Use cases
+ 
   sl.registerLazySingleton(() => GetMovies(sl()));
   sl.registerLazySingleton(() => GetMovieTrailer(sl()));
 
-  // Repository
+  
   sl.registerLazySingleton<MovieRepository>(
     () => MovieRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
   );
 
-  // Data sources
   sl.registerLazySingleton<MovieRemoteDataSource>(
     () => MovieRemoteDataSourceImpl(sl()),
   );
 
-  // Core
+
   sl.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(sl()),
   );
 
-  // External
+  
   sl.registerLazySingleton(() => InternetConnectionChecker());
   sl.registerLazySingleton(() {
     final dio = Dio(

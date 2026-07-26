@@ -25,15 +25,13 @@ void main() {
           ),
         );
 
-        // Initial loading state.
+       
         expect(find.byKey(const Key('loading_indicator')), findsOneWidget);
 
-        // Wait for the real network call to resolve.
+       
         await tester.pumpAndSettle(const Duration(seconds: 10));
 
-        // Either the list renders, or (on CI without a valid API key /
-        // network access) the error view renders - both are asserted so
-        // this test is meaningful in both environments.
+        
         final hasList = tester.any(find.byKey(const Key('movie_list_view')));
         final hasError = tester.any(find.byKey(const Key('error_view')));
         expect(hasList || hasError, isTrue);

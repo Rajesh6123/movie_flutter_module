@@ -16,7 +16,7 @@ class MovieListPage extends StatelessWidget {
       body: BlocConsumer<MovieBloc, MovieState>(
         listener: (context, state) {
           if (state is MovieTrailerReady) {
-            // Hand off to the native host app to show the trailer natively.
+           
             FlutterModuleApi.showNativeTrailer(
               movieId: state.movieId,
               trailerKey: state.trailerKey,
@@ -69,9 +69,7 @@ class MovieListPage extends StatelessWidget {
               },
             );
           }
-          // MovieTrailerReady / MovieTrailerError are transient states
-          // handled entirely in `listener`; the bloc immediately re-emits
-          // MovieLoaded afterwards, so nothing to render here.
+          
           return const SizedBox.shrink();
         },
       ),
