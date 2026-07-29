@@ -34,7 +34,14 @@ void main() {
   tearDown(() => bloc.close());
 
   const tMovies = [
-    Movie(id: 1, title: 'Inception', overview: 'Dreams', posterPath: '/a.jpg'),
+    Movie(
+      id: 1,
+      title: 'Inception',
+      overview: 'Dreams',
+      posterPath: '/a.jpg',
+      releaseDate: '2010',
+      voteAverage: 8.3,
+    ),
   ];
 
   test('initial state is MovieInitial', () {

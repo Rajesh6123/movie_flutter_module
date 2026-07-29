@@ -6,6 +6,8 @@ class MovieModel extends Movie {
     required super.title,
     required super.overview,
     required super.posterPath,
+    required super.releaseDate,
+    required super.voteAverage,
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -14,6 +16,8 @@ class MovieModel extends Movie {
       title: json['title'] as String? ?? 'Untitled',
       overview: json['overview'] as String? ?? '',
       posterPath: json['poster_path'] as String? ?? '',
+      releaseDate: json['release_date'] as String? ?? '',
+      voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0.0,
     );
   }
 
@@ -23,6 +27,8 @@ class MovieModel extends Movie {
       'title': title,
       'overview': overview,
       'poster_path': posterPath,
+      'release_date': releaseDate,
+      'vote_average': voteAverage,
     };
   }
 }

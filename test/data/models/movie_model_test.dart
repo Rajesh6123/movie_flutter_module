@@ -8,6 +8,8 @@ void main() {
     title: 'Inception',
     overview: 'A thief who steals corporate secrets...',
     posterPath: '/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg',
+    releaseDate: '2010-07-15',
+    voteAverage: 8.3,
   );
 
   test('should be a subclass of the Movie entity', () {
@@ -21,6 +23,8 @@ void main() {
         'title': 'Inception',
         'overview': 'A thief who steals corporate secrets...',
         'poster_path': '/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg',
+        'release_date': '2010-07-15',
+        'vote_average': 8.3,
       };
 
       final result = MovieModel.fromJson(json);
@@ -35,6 +39,8 @@ void main() {
       expect(result.title, 'Untitled');
       expect(result.overview, '');
       expect(result.posterPath, '');
+      expect(result.releaseDate, '');
+      expect(result.voteAverage, 0.0);
     });
   });
 
@@ -47,6 +53,8 @@ void main() {
         'title': 'Inception',
         'overview': 'A thief who steals corporate secrets...',
         'poster_path': '/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg',
+        'release_date': '2010-07-15',
+        'vote_average': 8.3,
       });
     });
   });

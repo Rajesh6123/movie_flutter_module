@@ -49,15 +49,43 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
       );
 
       if (response.statusCode == 200) {
-        final results = response.data['results'] as List<dynamic>;
-        final trailer = results.firstWhere(
-          (v) => v['type'] == 'Trailer' && v['site'] == 'YouTube',
-          orElse: () => null,
-        );
-        if (trailer == null) {
-          throw ServerException('No trailer found for this movie');
-        }
-        return trailer['key'] as String;
+        final videos = (response.data['results'] as List)
+    .cast<Map<String, dynamic>>();
+
+Map<String, dynamic>? selected;
+
+// Trailer
+selected = videos.cast<Map<String, dynamic>?>().firstWhere(
+  (v) => v!['site'] == 'YouTube' && v['type'] == 'Trailer',
+  orElse: () => null,
+);
+
+// Teaser
+selected ??= videos.cast<Map<String, dynamic>?>().firstWhere(
+  (v) => v!['site'] == 'YouTube' && v['type'] == 'Teaser',
+  orElse: () => null,
+);
+
+// Featurette
+selected ??= videos.cast<Map<String, dynamic>?>().firstWhere(
+  (v) => v!['site'] == 'YouTube' && v['type'] == 'Featurette',
+  orElse: () => null,
+);
+
+if (selected == null) {
+  throw ServerException('No playable video found');
+}
+
+return selected['key'];
+        // final results = response.data['results'] as List<dynamic>;
+        // final trailer = results.firstWhere(
+        //   (v) => v['type'] == 'Trailer' && v['site'] == 'YouTube',
+        //   orElse: () => null,
+        // );
+        // if (trailer == null) {
+        //   throw ServerException('No trailer found for this movie');
+        // }
+        // return trailer['key'] as String;
       }
       throw ServerException('Unexpected status code: ${response.statusCode}');
     } on DioException catch (e) {

@@ -19,8 +19,8 @@ void main() {
   });
 
   const tMovies = [
-    Movie(id: 1, title: 'Inception', overview: 'Dreams', posterPath: '/a.jpg'),
-    Movie(id: 2, title: 'Interstellar', overview: 'Space', posterPath: '/b.jpg'),
+    Movie(id: 1, title: 'Inception', overview: 'Dreams', posterPath: '/a.jpg', releaseDate: '2010', voteAverage: 8.3),
+    Movie(id: 2, title: 'Interstellar', overview: 'Space', posterPath: '/b.jpg', releaseDate: '2014', voteAverage: 8.6),
   ];
 
   test('should get list of movies from the repository', () async {

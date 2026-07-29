@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 class FlutterModuleApi {
   FlutterModuleApi._();
 
-  static const MethodChannel _channel = MethodChannel('movie_module/navigation');
+  static const MethodChannel _channel = MethodChannel('movie_flutter_module/navigation');
 
   static Future<void> showNativeTrailer({
     required int movieId,

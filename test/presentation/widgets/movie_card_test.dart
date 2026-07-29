@@ -9,6 +9,8 @@ void main() {
     title: 'The Matrix',
     overview: 'A hacker discovers reality is a simulation.',
     posterPath: '', // empty on purpose to avoid a real network call in tests
+    releaseDate: '1999-03-31',
+    voteAverage: 8.7,
   );
 
   Widget wrap(Widget child) => MaterialApp(home: Scaffold(body: child));

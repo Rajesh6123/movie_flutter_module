@@ -41,8 +41,8 @@ void main() {
 
   testWidgets('shows the list of movies once loaded', (tester) async {
     when(() => bloc.state).thenReturn(const MovieLoaded([
-      Movie(id: 1, title: 'Dune', overview: 'Desert planet.', posterPath: ''),
-      Movie(id: 2, title: 'Arrival', overview: 'Aliens land.', posterPath: ''),
+      Movie(id: 1, title: 'Dune', overview: 'Desert planet.', posterPath: '', releaseDate: '2021', voteAverage: 8.1),
+      Movie(id: 2, title: 'Arrival', overview: 'Aliens land.', posterPath: '', releaseDate: '2016', voteAverage: 7.9),
     ]));
 
     await tester.pumpWidget(wrap());
@@ -70,7 +70,7 @@ void main() {
   testWidgets('tapping a movie card dispatches MovieSelectedEvent',
       (tester) async {
     when(() => bloc.state).thenReturn(const MovieLoaded([
-      Movie(id: 7, title: 'Tenet', overview: 'Time inverts.', posterPath: ''),
+      Movie(id: 7, title: 'Tenet', overview: 'Time inverts.', posterPath: '', releaseDate: '2020', voteAverage: 7.5),
     ]));
 
     await tester.pumpWidget(wrap());

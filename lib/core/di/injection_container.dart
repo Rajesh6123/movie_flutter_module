@@ -10,9 +10,14 @@ import '../../presentation/bloc/movie_bloc.dart';
 import '../constants/api_constants.dart';
 import '../network/network_info.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../data/datasources/movie_local_data_source.dart';
+
 final GetIt sl = GetIt.instance;
 
 Future<void> initDependencies() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreferences);
 
   sl.registerFactory(
     () => MovieBloc(getMovies: sl(), getMovieTrailer: sl()),
@@ -24,11 +29,19 @@ Future<void> initDependencies() async {
 
   
   sl.registerLazySingleton<MovieRepository>(
-    () => MovieRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
+    () => MovieRepositoryImpl(
+      remoteDataSource: sl(),
+      localDataSource: sl(),
+      networkInfo: sl(),
+    ),
   );
 
   sl.registerLazySingleton<MovieRemoteDataSource>(
     () => MovieRemoteDataSourceImpl(sl()),
+  );
+
+  sl.registerLazySingleton<MovieLocalDataSource>(
+    () => MovieLocalDataSourceImpl(sharedPreferences: sl()),
   );
 
 
